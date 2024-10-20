@@ -29,7 +29,8 @@ jobs:
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > environment.json
       - name: Run API test
         run: |
-          newman run collection.json -e environment.json --reporters cli,html --reporter-html-export report.html --env-var "API_Key=${{ secrets.API_KEY }}
+          newman run collection.json -e environment.json --reporters cli,html --reporter-html-export report.html --env-var "API_Key=${{ secrets.API_KEY }}"
+
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
