@@ -4,7 +4,6 @@ on: push
 
 env:
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-  API_KEY: ${{ secrets.API_KEY }} 
 
 jobs:
   automated-api-tests:
@@ -21,7 +20,7 @@ jobs:
           npm install -g newman-reporter-html
       - name: Fetch Postman collection
         run: |
-          curl -X GET "https://api.getpostman.com/collections/36297486-5ecd4c50-a684-41a1-8c0a-fc322b04ce95" \
+          curl -X GET "https://api.getpostman.com/collections/36297486-69b30f7b-02d7-46d6-b7b5-4de74bf9334a" \
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > collection.json
       - name: Fetch Postman environment
         run: |
@@ -29,7 +28,7 @@ jobs:
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > environment.json
       - name: Run API test
         run: |
-          newman run collection.json -e environment.json --reporters cli,html --reporter-html-export report.html --env-var "API_Key=${{ secrets.API_KEY }}"
+          newman run collection.json -e environment.json --reporters cli,html --reporter-html-export report.html
 
       - name: Upload report
         uses: actions/upload-artifact@v4
